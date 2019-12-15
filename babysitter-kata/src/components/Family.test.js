@@ -1,5 +1,5 @@
-import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
+import React, { useState } from "react";
+import ReactDOM, { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
 import Family from "./Family";
@@ -18,19 +18,24 @@ afterEach(() => {
   container = null;
 });
 
-it("renders with or without a selected family", () => {
-//   act(() => {
-//     render(<Family />, container);
-//   });
-//   expect(container.textContent).toBe("Please select a family");
+function Select(props) {
+  const [text, setText] = useState('');
+  function handleClick() {
+    setText('A');
+  }
+  return <select onClick={handleClick}>{text || props.text}</select>;
+}
 
-  act(() => {
-    render(<Family name="A" />, container);
-  });
-  expect(container.textContent).toBe("A");
-
-  act(() => {
-    render(<Family name="B" />, container);
-  });
-  expect(container.textContent).toBe("B");
-});
+describe("Family component", () => {
+  test('it shows the expected text when clicked', () => {
+    act(() => {
+      ReactDOM.render(<Family />, container)
+    })
+    const select = container.getElementsByTagName('select')[0];
+    expect(select.value).toBe('Select a Family')
+    // act(() => {
+    //   select.dispatchEvent(new UIEvent('select', { target: { value: 'A' } }))
+    // })
+    // expect(select.value).toBe('A');
+  })
+})
