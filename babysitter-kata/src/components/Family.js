@@ -16,7 +16,7 @@ class Family extends Component {
     // }
     render() {
         return (
-            <div className='row'>
+            <div className='row m-3'>
                 <h1 className='col-12'>Family:</h1>
                 <div className="dropdown col-12">
                     <select>
