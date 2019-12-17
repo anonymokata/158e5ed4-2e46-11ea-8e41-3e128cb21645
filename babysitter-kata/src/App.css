@@ -42,3 +42,11 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.form-group {
+  display: grid;
+}
+
+input {
+  text-align: center;
+}

@@ -31,8 +31,8 @@ function Change(props) {
     )
 }
 
-describe("Family component", () => {
-    test('it shows the expected text when clicked', () => {
+describe("Total component", () => {
+    test('it shows the expected amount of money when rendered', () => {
         act(() => {
             ReactDOM.render(<Total money='50' />, container)
         })
@@ -42,5 +42,12 @@ describe("Family component", () => {
             ReactDOM.render(<Total money='200' />, container)
         })
         expect(h2.textContent).toBe('You will make $200 tonight');
+    })
+    test('it shows different amounts when different families are selected', () => {
+        act(() => {
+            ReactDOM.render(<Total money='50' />, container)
+        })
+        const h2 = container.getElementsByTagName('h2')[0];
+        expect(h2.textContent).toBe('You will make $50 tonight');
     })
 })
