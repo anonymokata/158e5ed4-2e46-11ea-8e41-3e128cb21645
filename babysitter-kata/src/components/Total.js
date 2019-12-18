@@ -7,7 +7,7 @@ function Total(props) {
     // })
     function calculateTotal() {
         if (props.family === '') {
-            return alert('Please select a family to babysit for')
+            return props.setModalMessage('Please select a family to babysit for')
         }
         if (props.family === 'A') {
             console.log('the family is A!')

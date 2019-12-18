@@ -3,6 +3,7 @@ import './App.css';
 import Family from './components/Family'
 import Hours from './components/Hours'
 import Total from './components/Total'
+import Modal from './components/Modal'
 
 function App() {
   // const [start, setStart] = useState('test');
@@ -10,6 +11,8 @@ function App() {
   // const [day, setDay] = useState(0);
   const [family, setFamily] = useState('');
   const [money, setMoney] = useState(0);
+  const [modal, setModal] = useState(false);
+  const [message, setMessage] = useState('');
   // let startTime = '';
   // let endTime = '';
   let hours = 0;
@@ -76,15 +79,24 @@ function App() {
     }
 
 }
+function setModalMessage(message) {
+  setMessage(message)
+  setModal(true)
+}
+function dismissModal() {
+    setModal(false)
+}
   return (
     <div className="App">
       <header className="jumbotron bg-white">
         <h1>Babysitter Kata</h1>
       </header>
+      {modal ? <Modal message={message} dismissModal={dismissModal} /> : null}
       <Family handleSelect={handleSelect} />
       <Hours
         family={family}
-        calculateHours={calculateHours} />
+        calculateHours={calculateHours}
+        setModalMessage={setModalMessage} />
       <Total
         family={family}
         money={money}
@@ -94,7 +106,8 @@ function App() {
         bSecondHours={bSecondHours}
         bThirdHours={bThirdHours}
         cBeforeHours={cBeforeHours}
-        cAfterHours={cAfterHours} />
+        cAfterHours={cAfterHours}
+        setModalMessage={setModalMessage} />
     </div>
   );
 }
