@@ -25,6 +25,9 @@ function Hours(props) {
             props.setModalMessage('Please enter a valid start time')
         } else {
             setStart(startTime)
+            if (end !== '') {
+                hours = props.calculateHours(startTime, end)
+            }
         }
     }
     function checkEndTime(event) {
