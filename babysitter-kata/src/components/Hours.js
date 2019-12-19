@@ -22,7 +22,7 @@ function Hours(props) {
         startTime = parseInt(document.getElementById('startTime').value)
         console.log('start time before conditional', startTime)
         if (startTime < 17 && startTime >= 4) {
-            alert('Please enter a valid start time')
+            props.setModalMessage('Please enter a valid start time')
         } else {
             setStart(startTime)
         }
@@ -33,13 +33,14 @@ function Hours(props) {
         endTime = parseInt(document.getElementById('endTime').value)
         endTime <= 4 ? day = 1 : hours = endTime - startTime
         if (start === '') {
-            return alert('Please enter a start time')
+            return props.setModalMessage('Please enter a start time')
         }
         if (start >= 17 && endTime <= start && day === 0) {
-            alert('Please enter a valid end time')
+            props.setModalMessage('Please enter a valid end time')
         } else {
             setEnd(endTime)
-            hours = props.calculateHours(startTime, endTime)
+            console.log('good stuff!  About to calculate hours', 'start =', start, endTime)
+            hours = props.calculateHours(start, endTime)
         }
         console.log(hours)
         console.log('day before conditional, after setDay', day)
@@ -49,7 +50,7 @@ function Hours(props) {
         day = 0
         // event.preventDefault()
         // if (props.family === '') {
-        //     return alert('Please select a family to babysit for')
+        //     return props.setModalMessage('Please select a family to babysit for')
         // }
         // console.log(start, end, day, family, money)
         if (startTime >= 17 && day === 1) {
@@ -59,7 +60,7 @@ function Hours(props) {
         } else if (hours > 0) {
             // calculateTotal()
         } else {
-            alert('Please enter a valid start and end time')
+            props.setModalMessage('Please enter a valid start and end time')
         }
         // console.log(start, end)
     };
@@ -80,34 +81,9 @@ function Hours(props) {
                     <button onClick={checkEndTime}>Set End Time</button>
                     <h3>End Time: {end}</h3>
                 </div>
-                {/* <div className='col-12'>
-                    <button onClick={handleClick} title='Calculate'>Calculate Pay</button>
-                </div> */}
             </form>
         </div>
     )
 }
-
-// class Hours extends Component {
-//     constructor(props) {
-//         super(props)
-//         this.state = {
-//             hours: []
-//         }
-//     }
-//     render() {
-//         return (
-//             <div className='row m-3'>
-//                 <h1 className='col-12'>Hours:</h1>
-//                 <form className='col-12 slider'>
-//                     <div class="form-group">
-//                         <label for="formControlRange">Example Range input</label>
-//                         <input type="range" class="form-control-range" id="formControlRange" />
-//                     </div>
-//                 </form>
-//             </div>
-//         )
-//     }
-// }
 
 export default Hours

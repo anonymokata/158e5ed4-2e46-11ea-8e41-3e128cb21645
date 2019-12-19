@@ -2,17 +2,20 @@ import React, { useState, useEffect } from 'react'
 
 function Total(props) {
     const [total, setTotal] = useState('0')
-    // useEffect(() => {
-    //     calculateTotal()
-    // })
     function calculateTotal() {
         if (props.family === '') {
             return props.setModalMessage('Please select a family to babysit for')
         }
         if (props.family === 'A') {
             console.log('the family is A!')
-            let aTotal = (props.aBeforeHours * 15) + (props.aAfterHours * 20)
-            setTotal(aTotal)
+            console.log(props.hours)
+            if (props.hours) {
+                let aTotal = props.hours * 15
+                console.log(aTotal)
+                setTotal(aTotal)
+            }
+            // let aTotal = (props.aBeforeHours * 15) + (props.aAfterHours * 20)
+            // setTotal(aTotal)
         } else if (props.family === 'B') {
             console.log('the family is B!')
             let bTotal = 1
