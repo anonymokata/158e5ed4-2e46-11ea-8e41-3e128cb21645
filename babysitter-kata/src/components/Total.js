@@ -15,16 +15,21 @@ function Total(props) {
             21: ['18:00', '19:00', '20:00', '21:00'],
             15: ['22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00']
         }
-    }
+    };
     const [total, setTotal] = useState(0);
     let time = 0;
     function getKeyByValue(object, value) {
         return parseInt(Object.keys(object).find(key => object[key].includes(value)));
-      }
+    };
     function calculateTotal() {
         let finalTotal = 0;
-        if (props.family === '') {
-            return props.setModalMessage('Please select a family to babysit for')
+        console.log(props.family)
+        if (props.family === '' || props.family.length > 1) {
+            return props.setModalMessage('Please select a family to babysit for');
+        } else if (props.start === '') {
+            return props.setModalMessage('Please select a start time');
+        } else if (props.end === '') {
+            return props.setModalMessage('Please select an end time');
         }
         let family = familyPay[props.family]
         for (let i = parseInt(props.start) + 1; i < parseInt(props.start) + 1 + props.hours; i++) {
@@ -41,7 +46,7 @@ function Total(props) {
             }
         }
         setTotal(finalTotal)
-    }
+    };
     return (
         <div>
             <div className='col-12'>
