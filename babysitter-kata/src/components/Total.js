@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 function Total(props) {
     let familyPay = {
@@ -22,13 +22,12 @@ function Total(props) {
         return parseInt(Object.keys(object).find(key => object[key].includes(value)));
       }
     function calculateTotal() {
-        let day = 0;
         let finalTotal = 0;
         if (props.family === '') {
             return props.setModalMessage('Please select a family to babysit for')
         }
         let family = familyPay[props.family]
-        for (let i = 18; i < 18 + props.hours; i++) {
+        for (let i = parseInt(props.start) + 1; i < parseInt(props.start) + 1 + props.hours; i++) {
             if (i === 24) {
                 time = '00:00';
                 finalTotal += getKeyByValue(family, time);
@@ -45,7 +44,6 @@ function Total(props) {
     }
     return (
         <div>
-            <h1>$$$ {props.hours}</h1>
             <div className='col-12'>
                 <button onClick={calculateTotal} title='Calculate'>Calculate Pay</button>
             </div>

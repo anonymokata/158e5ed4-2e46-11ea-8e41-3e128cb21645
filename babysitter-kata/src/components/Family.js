@@ -1,19 +1,6 @@
 import React from 'react'
 
 function Family(props) {
-    // constructor(props) {
-    //     super(props)
-    //     this.state = {
-    //         families: ['A', 'B', 'C'],
-    //         selected: ''
-    //     }
-    // }
-    // setFamily(event) {
-    //     console.log(event.target.textContent)
-    //     let family = event.target.textContent
-    //     console.log(family)
-    //     this.setState({selected: family})
-    // }
     return (
         <div className='row m-3'>
             <h1 className='col-12'>Family:</h1>
