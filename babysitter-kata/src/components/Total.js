@@ -50,7 +50,7 @@ function Total(props) {
     return (
         <div>
             <div className='col-12'>
-                <button className='m-3' onClick={calculateTotal} title='Calculate'>Calculate Pay</button>
+                <button className='font-weight-bold p-3 m-3' onClick={calculateTotal} title='Calculate'>Calculate Pay</button>
             </div>
             {total > 0 ? <h2 className='bg-white p-4 mx-auto' id='total'>You will make ${total} tonight</h2> : <h2></h2>}
         </div>

@@ -81,11 +81,11 @@
 }
 
 .jumbotron {
-  background: #7cb4da
+  background: #103785;
 }
 
 body {
-  background: #103785;
+  background: #7cb4da;
 }
 
 input {
@@ -97,4 +97,9 @@ input {
 button, select {
   border-radius: 15px;
   width: fit-content;
+}
+
+label {
+  -webkit-text-stroke: black 1.5px;
+  font-size: 2em;
 }
