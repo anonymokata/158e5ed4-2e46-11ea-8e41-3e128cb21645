@@ -23,7 +23,7 @@ function App() {
   function checkStartTime(event) {
     event.preventDefault()
     startTime = document.getElementById('startTime').value
-    if (startTime < 17 && startTime >= 4) {
+    if (parseInt(startTime) < 17 && parseInt(startTime) >= 4) {
       setModalMessage('Please enter a valid start time')
     } else {
       setStart(startTime)
@@ -36,13 +36,18 @@ function App() {
     event.preventDefault()
     day = 0
     endTime = document.getElementById('endTime').value
-    let totalHours = parseInt(endTime) - parseInt(startTime)
-    endTime <= 4 ? day = 1 : setHours(totalHours)
+    let endInt = parseInt(endTime)
+    let totalHours = endInt - parseInt(startTime)
+    endInt <= 4 || endInt < start ? day = 1 : setHours(totalHours)
+    console.log('day', day)
+    console.log('end', endInt)
     if (start === '') {
       return setModalMessage('Please enter a start time')
     }
-    if (start >= 17 && endTime <= start && day === 0) {
+    if (start >= 17 && endInt <= start && day === 0) {
       setModalMessage('Please enter a valid end time')
+    } else if (endInt > 4) {
+      setModalMessage('End time must be no later than 4 am')
     } else {
       setEnd(endTime)
       calculateHours(parseInt(start), parseInt(endTime))
@@ -73,8 +78,8 @@ function App() {
   return (
     <div className="App">
       {modal ? <Modal message={message} dismissModal={dismissModal} /> : null}
-      <header className="jumbotron bg-white">
-        <h1>Babysitter Kata</h1>
+      <header className="jumbotron py-5">
+        <h1 className='mx-auto p-2 bg-white titles'>Babysitter Kata</h1>
       </header>
       <Family handleSelect={handleSelect} />
       <Hours

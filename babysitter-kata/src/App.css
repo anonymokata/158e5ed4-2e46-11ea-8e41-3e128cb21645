@@ -15,7 +15,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #103785;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -47,6 +47,12 @@
   display: grid;
 }
 
+.titles {
+  border: solid black 2px;
+  width: fit-content;
+  border-radius: 15px;
+}
+
 #modalBackground {
   display: flex;
   align-items: center;
@@ -74,15 +80,21 @@
   width: fit-content;
 }
 
-/* body {
-  background: #282c34;
-} */
+.jumbotron {
+  background: #7cb4da
+}
+
+body {
+  background: #103785;
+}
 
 input {
   text-align: center;
   border-radius: 15px;
+  width: fit-content;
 }
 
 button, select {
   border-radius: 15px;
+  width: fit-content;
 }
