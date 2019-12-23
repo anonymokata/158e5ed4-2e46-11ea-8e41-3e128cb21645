@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import Instructions from './components/Instructions'
 import Family from './components/Family'
 import Hours from './components/Hours'
 import Total from './components/Total'
@@ -154,6 +155,7 @@ function App() {
       {modal ? <Modal message={message} dismissModal={dismissModal} /> : null}
       <header className="jumbotron py-5">
         <h1 className='mx-auto p-2 bg-white titles'>Babysitter Kata</h1>
+        <Instructions />
       </header>
       <Family handleSelect={handleSelect} />
       <Hours
