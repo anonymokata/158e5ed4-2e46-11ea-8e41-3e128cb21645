@@ -5,6 +5,9 @@ function Total(props) {
     const [total, setTotal] = useState(0);
     let time = 0;
     function getKeyByValue(object, value) {
+        console.log('object:', object)
+        console.log('value:', value)
+        console.log(parseInt(Object.keys(object).find(key => object[key].includes(value))))
         return parseInt(Object.keys(object).find(key => object[key].includes(value)));
     };
     function calculateTotal() {
@@ -16,11 +19,22 @@ function Total(props) {
             return props.setModalMessage('Please select a start time');
         } else if (props.end === '') {
             return props.setModalMessage('Please select an end time');
+        } else if (props.start < props.end && props.day === 1) {
+            return props.setModalMessage('Start time must be before end time')
         }
+
         let family = familyPay[props.family]
+        console.log('family:', family)
+        console.log('start:', props.start, 'hours:', props.hours)
         for (let i = parseInt(props.start) + 1; i < parseInt(props.start) + 1 + props.hours; i++) {
+            console.log('i:', i)
             if (i === 24) {
+                console.log('its midnight')
                 time = '00:00';
+                finalTotal += getKeyByValue(family, time);
+            } else if (i < 5) {
+                // let x = i - 24
+                time = `0${i}:00`
                 finalTotal += getKeyByValue(family, time);
             } else if (i > 24) {
                 let x = i - 24
@@ -31,6 +45,7 @@ function Total(props) {
                 finalTotal += getKeyByValue(family, time);
             }
         }
+        console.log('final total', finalTotal)
         setTotal(finalTotal)
     };
     return (
