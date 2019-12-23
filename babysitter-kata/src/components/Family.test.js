@@ -33,9 +33,9 @@ describe("Family component", () => {
     })
     const select = container.getElementsByTagName('select')[0];
     expect(select.value).toBe('Select a Family')
-    // act(() => {
-    //   select.dispatchEvent(new UIEvent('select', { target: { value: 'A' } }))
-    // })
-    // expect(select.value).toBe('A');
+    act(() => {
+      select.dispatchEvent(new UIEvent('change', { target: { value: 'A' } }))
+    })
+    expect(select.value).toBe('A');
   })
 })
