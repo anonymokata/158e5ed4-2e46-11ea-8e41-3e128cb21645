@@ -5,24 +5,29 @@ function Total(props) {
     const [total, setTotal] = useState(0);
     let time = 0;
     function getKeyByValue(object, value) {
-        console.log('object:', object)
-        console.log('value:', value)
-        console.log(parseInt(Object.keys(object).find(key => object[key].includes(value))))
+        // console.log('object:', object)
+        // console.log('value:', value)
+        // console.log(parseInt(Object.keys(object).find(key => object[key].includes(value))))
         return parseInt(Object.keys(object).find(key => object[key].includes(value)));
     };
     function calculateTotal() {
         let finalTotal = 0;
         console.log(props.family)
+        console.log('end', props.end, 'start', props.start, 'day', props.day)
         if (props.family === '' || props.family.length > 1) {
             return props.setModalMessage('Please select a family to babysit for');
         } else if (props.start === '') {
             return props.setModalMessage('Please select a start time');
         } else if (props.end === '') {
             return props.setModalMessage('Please select an end time');
-        } else if (props.start < props.end && props.day === 1) {
-            return props.setModalMessage('Start time must be before end time')
+        // } else if (props.day === 1 && (parseInt(props.start) < parseInt(props.end) && props.day === 1)) {
+        //     return props.setModalMessage('Start time must be before end time')
+        } else if ((parseInt(props.end) <= parseInt(props.start) && props.day === 0) || (props.day === 1 && (parseInt(props.end) <= parseInt(props.start) && parseInt(props.start) < 5))) {
+            return props.setModalMessage('Please enter valid start and end times')
         }
-
+        // else if (props.end < props.start && (props.day === 0 || props.day === 1)) {
+        //     return props.setModalMessage('Please enter valid start and end times');
+        // }
         let family = familyPay[props.family]
         console.log('family:', family)
         console.log('start:', props.start, 'hours:', props.hours)
