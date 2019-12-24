@@ -20,11 +20,13 @@ function App() {
   let endTime = '';
   let eveningTime = '';
   let isTomorrow = 0;
+  // Sets the selected family chosen by the user
   function handleSelect(event) {
     event.preventDefault()
     let fam = event.target.value
     setFamily(fam)
   }
+  // Checks the selected start time and alerts the user if there is an error
   function checkStartTime(event) {
     event.preventDefault()
     isTomorrow = 0
@@ -35,34 +37,24 @@ function App() {
       isTomorrow = 1
       setDay(isTomorrow)
     }
-    console.log(typeof event.target, Object.values(event.target))
-    console.log(typeof parseInt(event.target.value), parseInt(event.target.value))
     startTime = event.target.value
-    console.log(typeof parseInt(startTime), parseInt(startTime))
-    // startTime = document.getElementById('startTime').value
-    console.log('day', day)
-    console.log('am:', am, 'pm: ', pm)
-    console.log('end', end, endTime, parseInt(end), 'start', parseInt(startTime))
     if (startTime.includes('time')) {
       return setModalMessage('Please enter a valid start time')
-      // } else if (parseInt(end) < parseInt(startTime) && (day === 0 || day === 1)) {
-        // (props.day === 1 && (parseInt(props.end) <= parseInt(props.start) && parseInt(props.start) < 5))
     } else if ((parseInt(end) <= parseInt(startTime) && isTomorrow === 0) || (isTomorrow === 1 && (parseInt(end) <= parseInt(startTime) && parseInt(startTime) < 5))) {
       return setModalMessage('Start time must be before end time')
     } else {
       setStart(startTime)
       for (let item of Object.values(event.target)) {
-        console.log(item)
         if (item.value === event.target.value) {
           setAm(item.textContent)
         }
       }
-
       if (end !== '') {
         calculateHours(parseInt(startTime), parseInt(end))
       }
     }
   }
+  // Checks the selected end time and lets the user know if there is an error in the selection
   function checkEndTime(event) {
     event.preventDefault()
     isTomorrow = 0
@@ -71,9 +63,7 @@ function App() {
     setEnd('')
     let eveningTime = ''
     endTime = event.target.value
-    // endTime = document.getElementById('endTime').value
     for (let item of Object.values(event.target)) {
-      console.log(item)
       if (item.value === event.target.value) {
         eveningTime = item.textContent
         setPm(eveningTime)
@@ -82,60 +72,43 @@ function App() {
     let endInt = parseInt(endTime)
     let totalHours = endInt - parseInt(startTime)
     if (endInt <= 4) {
-      console.log('setting day to 1')
       isTomorrow = 1
       setDay(isTomorrow)
-      console.log('after setDay:', day)
-    } else if (endInt < parseInt(start) && isTomorrow === 0) {
-      return setModalMessage('End time cannot be before start time')
-    } else if (endInt > 17 && parseInt(start) < 4 && isTomorrow === 0) {
-      return setModalMessage('End time cannot be before start time')
-    } else if (endInt < parseInt(start) && isTomorrow === 1) {
+    }
+    if ((endInt < parseInt(start) && isTomorrow === 0) || (endInt > 17 && parseInt(start) < 4 && isTomorrow === 0) || (isTomorrow === 1 && (endInt <= parseInt(start) && parseInt(start) < 5))) {
       return setModalMessage('End time cannot be before start time')
     } else {
       setHours(totalHours)
     }
-    // endInt <= 4 || endInt < start ? day = 1 : setHours(totalHours)
-    console.log('day', day)
-    console.log('start', start)
-    console.log('end', endInt)
-    console.log('am: ', am, 'pm:', parseInt(eveningTime))
     if (start === '') {
       return setModalMessage('Please enter a start time')
     }
     if (start >= 17 && endInt <= start && isTomorrow === 0) {
-      // if (endInt <= start && day === 0) {
       setModalMessage('Please enter a valid end time')
     } else if (endInt > 4 && isTomorrow === 1) {
       setModalMessage('End time must be no later than 4 am')
     } else {
-      console.log('setting end time now')
       setEnd(endTime)
       return calculateHours(parseInt(start), parseInt(endTime))
     }
   }
+  // Calculates the total number of hours worked based on the selected start and end times
   function calculateHours(start, end) {
     if (family === '') {
       setStart('')
       setEnd('')
-      // setHours(0)
-      console.log('hours', hours)
       return setModalMessage('Please select a family to babysit for')
     }
-    console.log(parseInt(end), parseInt(startTime), day)
     if (start >= 17 && end > 17) {
-      console.log('start and end in the pm')
       let totalHours = end - start
       setHours(totalHours)
       return hours
     } else if (start >= 17 && end < 5) {
-      console.log('evening start, morning finish')
       let eveningHours = 24 - start
       let totalHours = eveningHours + end
       setHours(totalHours)
       return hours
     } else if (start < 5 && end < 5) {
-      console.log('start and end in the am')
       let totalHours = end - start
       setHours(totalHours)
       return hours
@@ -143,10 +116,12 @@ function App() {
       return setModalMessage('Start time must be before end time')
     }
   }
+  // Sets error messages in the modal component and displays the modal
   function setModalMessage(message) {
     setMessage(message)
     setModal(true)
   }
+  // Dismisses the Modal
   function dismissModal() {
     setModal(false)
   }
