@@ -1,8 +1,6 @@
 # Babysitter-Kata
 This kata is used to calculate the total paid to a babysitter given the hours worked and the particular family chosen to babysit for.
 
-You must (yes, "must") include a README file with your submission that tells us exactly how to build and run your solution. The best option for us is to have one or two commands to accomplish that, depending on the tech stack and tools you've chosen. We'd like to see the equivalent of 'make build' or 'gradle test.' 
-
 ## Installation and build
 All below commands are to be run from the command line
 ### Clone repository
