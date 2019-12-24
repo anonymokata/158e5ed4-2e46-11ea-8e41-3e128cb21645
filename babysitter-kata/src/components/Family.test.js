@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import ReactDOM, { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
-
 import Family from "./Family";
-
 let container = null;
+
 beforeEach(() => {
   // setup a DOM element as a render target
   container = document.createElement("div");
@@ -34,7 +33,7 @@ describe("Family component", () => {
     const select = container.getElementsByTagName('select')[0];
     expect(select.value).toBe('Select a Family')
     act(() => {
-      select.dispatchEvent(new UIEvent('change', { target: { value: 'A' } }))
+      select.dispatchEvent(new UIEvent('select', { target: { value: 'A' } }))
     })
     expect(select.value).toBe('A');
   })

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM, { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
-
 import Total from "./Total";
 
 let container = null;
@@ -32,12 +31,24 @@ function Change(props) {
 }
 
 describe("Total component", () => {
-    test('it shows the expected amount of money when rendered', () => {
+    test('it shows the calculate button when rendered', () => {
         act(() => {
-            ReactDOM.render(<Total total='5' />, container)
+            ReactDOM.render(<Total />, container)
+        })
+        const button = container.getElementsByTagName('button')[0];
+        expect(button.textContent).toBe('Calculate Pay');
+    })
+    test('it shows a total of 100 dollars when calculated', () => {
+        act(() => {
+            ReactDOM.render(<Total family='A' start='17' end='20'/>, container)
+        })
+        const button = container.querySelector('button');
+        act(() => {
+            button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
         })
         const h2 = container.getElementsByTagName('h2')[0];
-        expect(h2.textContent).toBe('You will make $75 tonight')
+        expect(h2.id).toBe('You will make $75 tonight')
+
         // act(() => {
         //     ReactDOM.render(<Total hours='200' />, container)
         // })
