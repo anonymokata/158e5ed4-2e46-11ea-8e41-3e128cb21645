@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactDOM, { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import Total from "./Total";
+import { checkEndTime, checkStartTime } from "../App"
 
 let container = null;
 beforeEach(() => {
@@ -21,9 +22,6 @@ function Change(props) {
     const [text, setText] = useState('hello');
     function handleClick() {
         setText('50');
-        //   console.log('text', text)
-        //   console.log('input value', container.getElementsByTagName('input')[0].value)
-        //   container.getElementsByTagName('input')[0].value = text
     }
     return (
         <h2 onClick={handleClick}>{text || props.text}</h2>
@@ -32,6 +30,7 @@ function Change(props) {
 
 describe("Total component", () => {
     test('it shows the calculate button when rendered', () => {
+        const onClick = jest.fn()
         act(() => {
             ReactDOM.render(<Total />, container)
         })
@@ -40,25 +39,13 @@ describe("Total component", () => {
     })
     test('it shows a total of 100 dollars when calculated', () => {
         act(() => {
-            ReactDOM.render(<Total family='A' start='17' end='20'/>, container)
+            ReactDOM.render(<Total family='A' hours='3' start='17' end='20' checkStartTime={checkStartTime} checkEndTime={checkEndTime} />, container)
         })
         const button = container.querySelector('button');
         act(() => {
-            button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+            button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
         })
         const h2 = container.getElementsByTagName('h2')[0];
-        expect(h2.id).toBe('You will make $75 tonight')
-
-        // act(() => {
-        //     ReactDOM.render(<Total hours='200' />, container)
-        // })
-        // expect(h2.textContent).toBe('You will make $200 tonight');
+        expect(h2.textContent).toContain('45')
     })
-    // test('it shows different amounts when different families are selected', () => {
-    //     act(() => {
-    //         ReactDOM.render(<Total hours='5' family='A' />, container)
-    //     })
-    //     const h2 = container.getElementsByTagName('h2')[0];
-    //     expect(h2.textContent).toBe('You will make $75 tonight');
-    // })
 })

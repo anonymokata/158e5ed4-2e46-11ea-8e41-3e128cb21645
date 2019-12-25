@@ -45,7 +45,6 @@ describe("Hours component", () => {
   test('it shows a start time of 05:00 pm when selected', () => {
     act(() => {
       ReactDOM.render(<Hours am='05:00 pm' />, container)
-      // startTime.dispatchEvent(new UIEvent('select', { target: {value: 17 }}))
     })
     const h3Start = container.getElementsByTagName('h3')[1];
     expect(h3Start.textContent).toBe('Start Time: 05:00 pm');
@@ -53,7 +52,6 @@ describe("Hours component", () => {
   test('it shows an end time of 01:00 am when selected', () => {
     act(() => {
       ReactDOM.render(<Hours pm='01:00 am' />, container)
-      // startTime.dispatchEvent(new UIEvent('select', { target: {value: 17 }}))
     })
     const h3End = container.getElementsByTagName('h3')[3];
     expect(h3End.textContent).toBe('End Time: 01:00 am');
@@ -61,7 +59,6 @@ describe("Hours component", () => {
   test('it shows a start time of 05:00 pm and end time of 01:00 am when selected', () => {
     act(() => {
       ReactDOM.render(<Hours am='05:00 pm' pm='01:00 am' />, container)
-      // startTime.dispatchEvent(new UIEvent('select', { target: {value: 17 }}))
     })
     const h3Start = container.getElementsByTagName('h3')[1];
     expect(h3Start.textContent).toBe('Start Time: 05:00 pm');
