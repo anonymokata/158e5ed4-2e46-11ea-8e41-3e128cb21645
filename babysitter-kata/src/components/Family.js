@@ -13,7 +13,7 @@ function Family(props) {
                 </select>
             </div>
         </div>
-    )
+    );
 }
 
 export default Family

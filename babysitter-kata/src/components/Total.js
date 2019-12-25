@@ -37,7 +37,7 @@ function Total(props) {
                 finalTotal += getKeyByValue(family, time);
             }
         }
-        setTotal(finalTotal)
+        setTotal(finalTotal);
     };
     return (
         <div>
