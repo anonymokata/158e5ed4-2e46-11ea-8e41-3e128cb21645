@@ -1,40 +1,21 @@
-import React, { useState } from "react";
-import ReactDOM, { render, unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
-import Family from "./Family";
-let container = null;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { configure, shallow } from 'enzyme';
+import { expect } from 'chai';
+import Family from './Family';
+import Adapter from 'enzyme-adapter-react-16'
 
-beforeEach(() => {
-  // setup a DOM element as a render target
-  container = document.createElement("div");
-  document.body.appendChild(container);
-});
+configure({ adapter: new Adapter() });
 
-afterEach(() => {
-  // cleanup on exiting
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
-
-function Select(props) {
-  const [text, setText] = useState('');
-  function handleClick() {
-    setText('A');
-  }
-  return <select onClick={handleClick}>{text || props.text}</select>;
-}
-
-describe("Family component", () => {
-  test('it shows the expected text when clicked', () => {
-    act(() => {
-      ReactDOM.render(<Family />, container)
-    })
-    const select = container.getElementsByTagName('select')[0];
-    expect(select.value).toBe('Select a Family')
-    act(() => {
-      select.dispatchEvent(new UIEvent('select', { target: { value: 'A' } }))
-    })
-    expect(select.value).toBe('A');
+describe('Family component testing', function () {
+  it('renders selection message', function () {
+    const wrapper = shallow(<Family />);
+    const header = <h1 className='col-12 p-2 bg-white titles'>Family</h1>;
+    expect(wrapper.contains(header)).to.equal(true);
+  });
+  it('renders selection options', function () {
+    const wrapper = shallow(<Family />);
+    const selection = <option>Select a Family</option>;
+    expect(wrapper.contains(selection)).to.equal(true);
   })
-})
+});
