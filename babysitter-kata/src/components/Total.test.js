@@ -37,15 +37,4 @@ describe("Total component", () => {
         const button = container.getElementsByTagName('button')[0];
         expect(button.textContent).toBe('Calculate Pay');
     })
-    test('it shows a total of 100 dollars when calculated', () => {
-        act(() => {
-            ReactDOM.render(<Total family='A' hours='3' start='17' end='20' checkStartTime={checkStartTime} checkEndTime={checkEndTime} />, container)
-        })
-        const button = container.querySelector('button');
-        act(() => {
-            button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-        })
-        const h2 = container.getElementsByTagName('h2')[0];
-        expect(h2.textContent).toContain('45')
-    })
 })
