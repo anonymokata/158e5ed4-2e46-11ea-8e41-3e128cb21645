@@ -23,5 +23,5 @@ Once initialzed and installed, the app is ready to be run locally using the foll
 ### One-line command
 To do all of the above in one command, copy the following into the terminal:
 ```
-git clone https://github.com/aljoker2001/Babysitter-Kata.git && cd Babysitter-Kata/baby sitter-kata && npm init -y && npm install && npm start
+git clone https://github.com/aljoker2001/Babysitter-Kata.git && cd Babysitter-Kata/babysitter-kata && npm init -y && npm install && npm start
 ```
