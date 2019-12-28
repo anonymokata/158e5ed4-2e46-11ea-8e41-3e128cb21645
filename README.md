@@ -20,3 +20,8 @@ npm install
 ### Run app
 Once initialzed and installed, the app is ready to be run locally using the following command: `npm start`.  Once this command is run, the app will open in your default browser.
 
+### One-line command
+To do all of the above in one command, copy the following into the terminal:
+```
+git clone https://github.com/aljoker2001/Babysitter-Kata.git && cd Babysitter-Kata/baby sitter-kata && npm init -y && npm install && npm start
+```
